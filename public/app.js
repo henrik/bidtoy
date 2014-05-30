@@ -44,6 +44,10 @@ bidApp.controller("bidCtrl", function($scope, $http, $timeout) {
     return leading + bidStep;
   };
 
+  $scope.bidColor = function(bid) {
+    return colors[bid.buyer];
+  };
+
   function getUpdates() {
     $http.get("/bids.json").success(function(data) {
       $scope.bids = data;

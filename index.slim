@@ -19,7 +19,7 @@ html ng-app="bidApp"
     table.bids
       tr.bid ng-repeat="bid in bids track by bid.id" ng-show="$index < truncateAt"
         td.bid-buyer
-          span(style="background: {{colors[bid.buyer]}}")= "{{bid.buyer}}"
+          span(style="background: {{bidColor(bid)}}")= "{{bid.buyer}}"
         td.bid-time= "{{bid.time}}"
         td.bid-amount ng-class="{ 'reserve-met': bid.reserve_met }"
           ' {{bid.amount}} SEK
