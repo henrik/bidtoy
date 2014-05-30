@@ -27,6 +27,7 @@ a {
 }
 
 table.bids {
+  margin-top: 2em;
   min-width: 300px;
 }
 
