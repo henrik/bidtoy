@@ -1,4 +1,4 @@
-var testApp = angular.module("testApp", [ "ngAnimate" ]);
+var bidApp = angular.module("bidApp", [ "ngAnimate" ]);
 
 var bids = [
   { amount: 400, buyer: 1, reserve_met: true, time: "2014-05-01 12:02" },
@@ -9,7 +9,7 @@ var bids = [
 var initiallyTruncateAt = 5;
 var colors = [ "_", "powderblue", "chartreuse", "yellow", "pink", "#eee" ];
 
-testApp.controller("testCtrl", function($scope) {
+bidApp.controller("bidCtrl", function($scope) {
   $scope.truncateAt = initiallyTruncateAt;
 
   $scope.colors = colors;
