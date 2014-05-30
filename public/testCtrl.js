@@ -1,40 +1,24 @@
-var testApp = angular.module("testApp", []);
+var testApp = angular.module("testApp", [ 'ngAnimate' ]);
 
-/*
+var names = [ "Pelle", "Erik" ];
+var otherNames = [ "Adam", "David", "Erik", "Jones" ];
 
-var db = {
-  1: { id: 1, name: "Pelle", snippet: "Allt om Pelle." },
-  2: { id: 2, name: "Erik", snippet: "Erik är en fiskpinne." },
-};
+testApp.controller("testCtrl", function($scope, $timeout) {
+  $scope.persons = names;
 
-function dbValues() {
-  return Object.keys(db).map(function (key) { return db[key]; });
-};
+  $timeout(function() {
+    $scope.persons = otherNames;
+  }, 1000);
 
-testApp.controller("testCtrl", function($scope) {
+  $timeout(function() {
+    $scope.persons = names;
+  }, 3000);
 
-  console.log("nothing yet", $scope);
+  $timeout(function() {
+    $scope.persons = otherNames;
+  }, 5000);
 
-  $scope.persons = dbValues();
-
-  $scope.viewPerson = function(id) {
-    $scope.person = db[id];
-  };
-
-  $scope.addPerson = function() {
-    var id = parseInt(prompt("ID?", 3), 10);
-    var name = prompt("Name?", "Gob");
-
-    db[id] = {
-      id: id,
-      name: name,
-      snippet: "Allt om " + name + "."
-    };
-    $scope.persons = dbValues();
-
-    console.log("add: %o. %o", id, name);
-  };
-
+  $timeout(function() {
+    $scope.persons = names;
+  }, 7000);
 });
-
-*/
