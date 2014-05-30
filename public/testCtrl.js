@@ -19,8 +19,6 @@ testApp.controller("testCtrl", function($scope) {
   $scope.nextBidAmount = 450;
   $scope.formBidAmount = $scope.nextBidAmount;
 
-  $scope.leadingBidAmount = 400;
-
   $scope.placeBid = function() {
     var amount = $scope.formBidAmount;
     var minAmount = $scope.nextBidAmount;
@@ -37,7 +35,6 @@ testApp.controller("testCtrl", function($scope) {
       }
       $scope.bids.unshift(bid);
 
-      $scope.leadingBidAmount = amount;
       $scope.nextBidAmount = amount + 50;
       $scope.formBidAmount = $scope.nextBidAmount;
     }

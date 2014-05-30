@@ -6,7 +6,7 @@ html ng-app="testApp"
 
   body ng-controller="testCtrl"
 
-    p Leading bid: {{leadingBidAmount}} SEK
+    p Leading bid: {{bids[0].amount}} SEK
 
     form ng-submit="placeBid()"
       p
