@@ -15,7 +15,7 @@ bidApp.controller("bidCtrl", function($scope, $http) {
   $scope.buyerId = 1;
 
   $scope.placeBid = function() {
-    var amount = $scope.formBidAmount;
+    var amount = parseInt($scope.formBidAmount, 10);
     var minAmount = $scope.nextBidAmount;
 
     if (amount < minAmount) {
