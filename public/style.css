@@ -1,23 +1,27 @@
-.ng-animate {
+a {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.list {
+  width: 300px;
+  float: left;
+}
+.details {
+  width: 300px;
+  float: left;
 }
 
 .person {
   -webkit-transition: 1s;
-  height: 100px;
-}
-
-.person h3 {
-  margin: 0;
 }
 
 .person.ng-enter,
 .person.ng-leave.ng-leave-active {
   opacity: 0;
-  height: 0;
 }
 
 .person.ng-leave,
 .person.ng-enter.ng-enter-active {
   opacity: 1;
-  height: 100px;
 }

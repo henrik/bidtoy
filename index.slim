@@ -5,11 +5,20 @@ html ng-app="testApp"
     link rel="stylesheet" href="/style.css"
 
   body ng-controller="testCtrl"
+    p: a(ng-click="addPerson()") Add someone
+
     section.list
-      h1 People
+      h2 list
       div.person ng-repeat="person in persons"
-        h3= "{{person}}"
-        p All about {{person}}.
+        h3= "{{person.name}}"
+        p= "{{person.snippet}}"
+        input
+        p: a(ng-click="viewPerson(person.id)") Details plz
+
+    section.details ng-show="person"
+      h2 details
+      h3= "{{person.name}}"
+      p= "{{person.snippet}}"
 
     script src="/angular.js"
     script src="/angular-animate.js"
