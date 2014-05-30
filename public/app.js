@@ -6,11 +6,11 @@ var colors = [ "_", "powderblue", "chartreuse", "yellow", "pink", "#eee" ];
 bidApp.controller("bidCtrl", function($scope, $http, $timeout) {
   $scope.truncateAt = initiallyTruncateAt;
   $scope.colors = colors;
+  $scope.buyerId = 1;
 
   function getUpdates() {
     $http.get("/bids.json").success(function(data) {
       $scope.bids = data;
-      setLeadingBidAmount(data[0].amount);
     });
 
     // Effectively, run this method once a second.
@@ -20,11 +20,9 @@ bidApp.controller("bidCtrl", function($scope, $http, $timeout) {
 
   getUpdates();
 
-  $scope.buyerId = 1;
-
   $scope.placeBid = function() {
     var amount = parseInt($scope.formBidAmount, 10);
-    var minAmount = $scope.nextBidAmount;
+    var minAmount = $scope.nextBidAmount();
     amount = amount || minAmount;  // If empty, default.
 
     $scope.formBidAmount = "";
@@ -35,7 +33,6 @@ bidApp.controller("bidCtrl", function($scope, $http, $timeout) {
       var postData = { amount: amount, buyer: $scope.buyerId };
       $http.post("/bid.json", postData).success(function(bid) {
         $scope.bids.unshift(bid);
-        setLeadingBidAmount(bid.amount);
       });
     }
   };
@@ -44,8 +41,15 @@ bidApp.controller("bidCtrl", function($scope, $http, $timeout) {
     $scope.truncateAt = 9999;
   };
 
-  function setLeadingBidAmount(leadingAmount) {
-    $scope.leadingBidAmount = leadingAmount;
-    $scope.nextBidAmount = leadingAmount + 50;
-  }
+  $scope.leadingBidAmount = function() {
+    if (!$scope.bids) return;
+    return $scope.bids[0].amount;
+  };
+
+  $scope.nextBidAmount = function() {
+    var leading = $scope.leadingBidAmount();
+    if (!leading) return;
+
+    return leading + 50;
+  };
 });
