@@ -7,7 +7,7 @@ var bids = [
 ];
 
 var initiallyTruncateAt = 5;
-var colors = [ "_", "powderblue", "chartreuse", "yellow", "pink", "green", "red" ];
+var colors = [ "_", "powderblue", "chartreuse", "yellow", "pink", "#eee" ];
 
 testApp.controller("testCtrl", function($scope) {
   $scope.truncateAt = initiallyTruncateAt;
@@ -15,22 +15,32 @@ testApp.controller("testCtrl", function($scope) {
   $scope.colors = colors;
   $scope.bids = bids;
   $scope.buyerId = 1;
-  $scope.newBidAmount = 450;
+
+  $scope.nextBidAmount = 450;
+  $scope.formBidAmount = $scope.nextBidAmount;
+
   $scope.leadingBidAmount = 400;
 
   $scope.placeBid = function() {
-    var amount = $scope.newBidAmount;
+    var amount = $scope.formBidAmount;
+    var minAmount = $scope.nextBidAmount;
 
-    var bid = {
-      amount: amount,
-      buyer: $scope.buyerId,
-      reserve_met: true,
-      time: "2014-05-01 12:03",
+    if (amount < minAmount) {
+      alert("Bid at least " + minAmount);
+      $scope.formBidAmount = minAmount;
+    } else {
+      var bid = {
+        amount: amount,
+        buyer: $scope.buyerId,
+        reserve_met: true,
+        time: "2014-05-01 12:03",
+      }
+      $scope.bids.unshift(bid);
+
+      $scope.leadingBidAmount = amount;
+      $scope.nextBidAmount = amount + 50;
+      $scope.formBidAmount = $scope.nextBidAmount;
     }
-    $scope.bids.unshift(bid);
-
-    $scope.leadingBidAmount = amount;
-    $scope.newBidAmount = amount + 50;
   };
 
   $scope.showAllBids = function() {
