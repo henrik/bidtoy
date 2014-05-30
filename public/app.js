@@ -1,12 +1,11 @@
 var bidApp = angular.module("bidApp", [ "ngAnimate" ]);
 
-const initiallyTruncateAt = 5;
-const colors = [ "_", "powderblue", "chartreuse", "yellow", "pink", "#eee" ];
-const bidStep = 50;
+const TRUNCATE_AT = 5;
+const COLORS = [ "_", "powderblue", "chartreuse", "yellow", "pink", "#eee" ];
+const BID_STEP = 50;
 
 bidApp.controller("bidCtrl", function($scope, $http, $timeout) {
-  $scope.truncateAt = initiallyTruncateAt;
-  $scope.colors = colors;
+  $scope.truncateAt = TRUNCATE_AT;
   $scope.buyerId = 1;
 
   getUpdates();
@@ -41,11 +40,11 @@ bidApp.controller("bidCtrl", function($scope, $http, $timeout) {
     var leading = $scope.leadingBidAmount();
     if (!leading) return;
 
-    return leading + bidStep;
+    return leading + BID_STEP;
   };
 
   $scope.bidColor = function(bid) {
-    return colors[bid.buyer];
+    return COLORS[bid.buyer];
   };
 
   function getUpdates() {
