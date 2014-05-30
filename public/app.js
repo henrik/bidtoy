@@ -2,6 +2,7 @@ var bidApp = angular.module("bidApp", [ "ngAnimate" ]);
 
 const initiallyTruncateAt = 5;
 const colors = [ "_", "powderblue", "chartreuse", "yellow", "pink", "#eee" ];
+const bidStep = 50;
 
 bidApp.controller("bidCtrl", function($scope, $http, $timeout) {
   $scope.truncateAt = initiallyTruncateAt;
@@ -40,7 +41,7 @@ bidApp.controller("bidCtrl", function($scope, $http, $timeout) {
     var leading = $scope.leadingBidAmount();
     if (!leading) return;
 
-    return leading + 50;
+    return leading + bidStep;
   };
 
   function getUpdates() {
@@ -48,8 +49,7 @@ bidApp.controller("bidCtrl", function($scope, $http, $timeout) {
       $scope.bids = data;
     });
 
-    // Effectively, run this method once a second.
-    // Poor man's websocket.
-    $timeout(getUpdates, 1000);
+    // Run this method on an interval. Poor man's websocket.
+    $timeout(getUpdates, 2000);
   }
 });
