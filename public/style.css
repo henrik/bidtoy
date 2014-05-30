@@ -25,3 +25,19 @@ a {
 .person.ng-enter.ng-enter-active {
   opacity: 1;
 }
+
+.details {
+}
+
+.details.ng-hide-add, .details.ng-hide-remove {
+  -webkit-transition: 0.5s;
+  /* https://docs.angularjs.org/api/ng/directive/ngHide#a-note-about-animations-with-nghide */
+  display: block !important;
+}
+
+.details.ng-hide-remove {
+  opacity: 0;
+}
+.details.ng-hide-remove-active {
+  opacity: 1;
+}

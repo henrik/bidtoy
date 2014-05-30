@@ -25,8 +25,7 @@ testApp.controller("testCtrl", function($scope) {
       name: name,
       snippet: "Allt om " + name + "."
     };
-    $scope.persons = dbValues();
 
-    console.log("add: %o. %o", id, name);
+    $scope.persons = dbValues();
   };
 });
