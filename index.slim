@@ -21,7 +21,7 @@ html ng-app="bidApp"
       button Place bid
 
     table.bids
-      tr.bid ng-repeat="bid in bids" ng-show="$index < truncateAt"
+      tr.bid ng-repeat="bid in bids track by bid.id" ng-show="$index < truncateAt"
         td.bid-buyer
           span(style="background: {{colors[bid.buyer]}}")= "{{bid.buyer}}"
         td.bid-time= "{{bid.time}}"

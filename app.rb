@@ -12,16 +12,17 @@ module Database
   end
 
   def self.add_bid(values)
-    all_values = values.merge(reserve_met: true, time: "2014-05-01 12:05")
+    new_id = bids.map { |b| b[:id] }.max + 1
+    all_values = values.merge(reserve_met: true, time: "2014-05-01 12:05", id: new_id)
     bids.unshift(all_values)
   end
 end
 
 # Initial value.
 Database.bids = [
-  { amount: 400, buyer: 1, reserve_met: true, time: "2014-05-01 12:02" },
-  { amount: 350, buyer: 2, reserve_met: false, time: "2014-05-01 12:01" },
-  { amount: 300, buyer: 1, reserve_met: false, time: "2014-05-01 12:00" },
+  { id: 3, amount: 400, buyer: 1, reserve_met: true, time: "2014-05-01 12:02" },
+  { id: 2, amount: 350, buyer: 2, reserve_met: false, time: "2014-05-01 12:01" },
+  { id: 1, amount: 300, buyer: 1, reserve_met: false, time: "2014-05-01 12:00" },
 ]
 
 set :views, -> { root }

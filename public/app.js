@@ -3,14 +3,22 @@ var bidApp = angular.module("bidApp", [ "ngAnimate" ]);
 var initiallyTruncateAt = 5;
 var colors = [ "_", "powderblue", "chartreuse", "yellow", "pink", "#eee" ];
 
-bidApp.controller("bidCtrl", function($scope, $http) {
+bidApp.controller("bidCtrl", function($scope, $http, $timeout) {
   $scope.truncateAt = initiallyTruncateAt;
   $scope.colors = colors;
 
-  $http.get("/bids.json").success(function(data) {
-    $scope.bids = data;
-    setLeadingBidAmount(data[0].amount);
-  });
+  function getUpdates() {
+    $http.get("/bids.json").success(function(data) {
+      $scope.bids = data;
+      setLeadingBidAmount(data[0].amount);
+    });
+
+    // Effectively, run this method once a second.
+    // Poor man's websocket.
+    $timeout(getUpdates, 1000);
+  }
+
+  getUpdates();
 
   $scope.buyerId = 1;
 
