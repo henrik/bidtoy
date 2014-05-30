@@ -1,10 +1,10 @@
-var bidApp = angular.module("bidApp", [ "ngAnimate" ]);
+var App = angular.module("bidApp", [ "ngAnimate" ]);
 
 const TRUNCATE_AT = 5;
 const COLORS = [ "_", "powderblue", "chartreuse", "yellow", "pink", "#eee" ];
 const BID_STEP = 50;
 
-bidApp.controller("bidCtrl", function($scope, $http, $timeout) {
+App.controller("bidCtrl", function($scope, $http, $timeout) {
   $scope.truncateAt = TRUNCATE_AT;
   $scope.buyerId = 1;
 
