@@ -5,21 +5,29 @@ html ng-app="testApp"
     link rel="stylesheet" href="/style.css"
 
   body ng-controller="testCtrl"
-    p: a(ng-click="addPerson()") Add someone
 
-    section.list
-      h2 list
-      div.person ng-repeat="person in persons"
-        h3= "{{person.name}}"
-        p= "{{person.snippet}}"
-        input
-        p: a(ng-click="viewPerson(person.id)") Details plz
+    p Leading bid: {{leadingBidAmount}} SEK
+    p
+      ' Ends:
+      timer end-time="endTime" {{minutes}} min {{seconds}} sec
 
-    section.details ng-show="person"
-      h2 details
-      h3= "{{person.name}}"
-      p= "{{person.snippet}}"
+    form ng-submit="placeBid()"
+      input ng-model="newBidAmount"
+      button Place bid
+
+    table.bids
+      tr.bid ng-repeat="bid in bids" ng-show="$index < truncateAt"
+        td.bid-buyer
+          span(style="background: {{bid.color}}")= "{{bid.buyer}}"
+        td.bid-time= "{{bid.time}}"
+        td.bid-amount ng-class="{ 'reserve-met': bid.reserve_met }"
+          ' {{bid.amount}} SEK
+      tr ng-show="bids.length > truncateAt"
+        td.show-all-bids colspan=3
+          a ng-click="showAllBids()"
+            ' Show all {{bids.length}} bids
 
     script src="/angular.js"
     script src="/angular-animate.js"
+    script src="/timer.js"
     script src="/testCtrl.js"

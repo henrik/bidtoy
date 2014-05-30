@@ -1,31 +1,38 @@
-var testApp = angular.module("testApp", [ "ngAnimate" ]);
+var testApp = angular.module("testApp", [ "ngAnimate", "timer" ]);
 
-var db = {
-  1: { id: 1, name: "Pelle", snippet: "Allt om Pelle." },
-  2: { id: 2, name: "Erik", snippet: "Erik är en fiskpinne." },
-};
+var bids = [
+  { amount: 400, buyer: 1, color: "powderblue", reserve_met: true, time: "2014-05-01 12:02" },
+  { amount: 350, buyer: 2, color: "chartreuse", reserve_met: false, time: "2014-05-01 12:01" },
+  { amount: 300, buyer: 1, color: "powderblue", reserve_met: false, time: "2014-05-01 12:00" },
+];
 
-function dbValues() {
-  return Object.keys(db).map(function (key) { return db[key]; });
-};
+var initiallyTruncateAt = 5;
 
 testApp.controller("testCtrl", function($scope) {
-  $scope.persons = dbValues();
+  $scope.truncateAt = initiallyTruncateAt;
 
-  $scope.viewPerson = function(id) {
-    $scope.person = db[id];
+  $scope.bids = bids;
+  $scope.newBidAmount = 450;
+  $scope.leadingBidAmount = 400;
+  $scope.endTime = new Date().getTime() + (1000 * 60 * 5);
+
+  $scope.placeBid = function() {
+    var amount = $scope.newBidAmount;
+
+    var bid = {
+      amount: amount,
+      buyer: 2,
+      color: "chartreuse",
+      reserve_met: true,
+      time: "2014-05-01 12:03",
+    }
+    $scope.bids.unshift(bid);
+
+    $scope.leadingBidAmount = amount;
+    $scope.newBidAmount = amount + 50;
   };
 
-  $scope.addPerson = function() {
-    var id = parseInt(prompt("ID?", 3), 10);
-    var name = prompt("Name?", "Gob");
-
-    db[id] = {
-      id: id,
-      name: name,
-      snippet: "Allt om " + name + "."
-    };
-
-    $scope.persons = dbValues();
+  $scope.showAllBids = function() {
+    $scope.truncateAt = 9999;
   };
 });

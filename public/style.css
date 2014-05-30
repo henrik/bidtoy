@@ -12,32 +12,30 @@ a {
   float: left;
 }
 
-.person {
+.bid {
   -webkit-transition: 1s;
 }
 
-.person.ng-enter,
-.person.ng-leave.ng-leave-active {
+.bid.ng-enter,
+.bid.ng-leave.ng-leave-active {
   opacity: 0;
 }
 
-.person.ng-leave,
-.person.ng-enter.ng-enter-active {
+.bid.ng-leave,
+.bid.ng-enter.ng-enter-active {
   opacity: 1;
 }
 
-.details {
+table.bids {
+  min-width: 300px;
 }
 
-.details.ng-hide-add, .details.ng-hide-remove {
-  -webkit-transition: 0.5s;
-  /* https://docs.angularjs.org/api/ng/directive/ngHide#a-note-about-animations-with-nghide */
-  display: block !important;
+.bid-buyer span {
 }
 
-.details.ng-hide-remove {
-  opacity: 0;
-}
-.details.ng-hide-remove-active {
-  opacity: 1;
+.bid-amount { color: red; }
+.bid-amount.reserve-met { color: green; }
+
+td.show-all-bids {
+  text-align: center;
 }
