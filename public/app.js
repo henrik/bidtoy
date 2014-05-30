@@ -1,23 +1,18 @@
 var bidApp = angular.module("bidApp", [ "ngAnimate" ]);
 
-var bids = [
-  { amount: 400, buyer: 1, reserve_met: true, time: "2014-05-01 12:02" },
-  { amount: 350, buyer: 2, reserve_met: false, time: "2014-05-01 12:01" },
-  { amount: 300, buyer: 1, reserve_met: false, time: "2014-05-01 12:00" },
-];
-
 var initiallyTruncateAt = 5;
 var colors = [ "_", "powderblue", "chartreuse", "yellow", "pink", "#eee" ];
 
-bidApp.controller("bidCtrl", function($scope) {
+bidApp.controller("bidCtrl", function($scope, $http) {
   $scope.truncateAt = initiallyTruncateAt;
-
   $scope.colors = colors;
-  $scope.bids = bids;
-  $scope.buyerId = 1;
 
-  $scope.nextBidAmount = 450;
-  $scope.formBidAmount = $scope.nextBidAmount;
+  $http.get("/bids.json").success(function(data) {
+    $scope.bids = data;
+    setNextBidAmount(data[0].amount);
+  });
+
+  $scope.buyerId = 1;
 
   $scope.placeBid = function() {
     var amount = $scope.formBidAmount;
@@ -35,12 +30,16 @@ bidApp.controller("bidCtrl", function($scope) {
       }
       $scope.bids.unshift(bid);
 
-      $scope.nextBidAmount = amount + 50;
-      $scope.formBidAmount = $scope.nextBidAmount;
+      setNextBidAmount(amount);
     }
   };
 
   $scope.showAllBids = function() {
     $scope.truncateAt = 9999;
   };
+
+  function setNextBidAmount(leadingAmount) {
+    $scope.nextBidAmount = leadingAmount + 50;
+    $scope.formBidAmount = $scope.nextBidAmount;
+  }
 });
