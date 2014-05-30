@@ -3,14 +3,6 @@ a {
   text-decoration: underline;
   cursor: pointer;
 }
-.list {
-  width: 300px;
-  float: left;
-}
-.details {
-  width: 300px;
-  float: left;
-}
 
 .bid {
   -webkit-transition: 1s;
