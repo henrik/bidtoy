@@ -25,10 +25,12 @@ bidApp.controller("bidCtrl", function($scope, $http, $timeout) {
   $scope.placeBid = function() {
     var amount = parseInt($scope.formBidAmount, 10);
     var minAmount = $scope.nextBidAmount;
+    amount = amount || minAmount;  // If empty, default.
+
+    $scope.formBidAmount = "";
 
     if (amount < minAmount) {
       alert("Bid at least " + minAmount);
-      $scope.formBidAmount = minAmount;
     } else {
       var postData = { amount: amount, buyer: $scope.buyerId };
       $http.post("/bid.json", postData).success(function(bid) {
@@ -45,6 +47,5 @@ bidApp.controller("bidCtrl", function($scope, $http, $timeout) {
   function setLeadingBidAmount(leadingAmount) {
     $scope.leadingBidAmount = leadingAmount;
     $scope.nextBidAmount = leadingAmount + 50;
-    $scope.formBidAmount = $scope.nextBidAmount;
   }
 });
