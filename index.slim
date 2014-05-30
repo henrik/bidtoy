@@ -2,20 +2,34 @@ doctype html
 html ng-app="testApp"
   head
     title Test page
-  body ng-controller="testCtrl"
-    Xp What up
+    link rel="stylesheet" href="/style.css"
 
-    section
-      h2 list
-      div ng-repeat="phone in phones"
-        h3= "{{phone.name}}"
-        p= "{{phone.snippet}}"
-        p: a(ng-click="viewPhone(phone.id)") Details plz
+  body
+    /ng-controller="testCtrl"
+    p What up
 
-    section
-      h2 details
-      h3= "{{phone.name}}"
-      p= "{{phone.snippet}}"
+    div ng-init="checked=true"
+      label
+        input type="checkbox" ng-model="checked" style="float:left; margin-right:10px;"
+        ' Is Visible...
+      div class="check-element sample-show-hide" ng-show="checked" style="clear:both;" Visible...
+
+    /
+      p: a(ng-click="addPerson()") Add someone
+
+      section.list
+        h2 list
+        div ng-repeat="person in persons"
+          h3= "{{person.name}}"
+          p= "{{person.snippet}}"
+          input
+          p: a(ng-click="viewPerson(person.id)") Details plz
+
+      section.details ng-show="person"
+        h2 details
+        h3= "{{person.name}}"
+        p= "{{person.snippet}}"
 
     script src="/angular.js"
+    script src="/angular-animate.js"
     script src="/testCtrl.js"
