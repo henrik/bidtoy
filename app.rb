@@ -1,6 +1,7 @@
 require "sinatra"
 require "sinatra/json"
 require "slim"
+require "json"
 
 Slim::Engine.default_options[:pretty] = true
 
@@ -33,17 +34,8 @@ get "/bids.json" do
   json Database.bids
 end
 
-# GET for dev
-get "/bid.json" do
-  add_bid
-end
-
-# POST for prod
 post "/bid.json" do
-  add_bid
-end
-
-def add_bid
-  Database.add_bid(amount: params[:amount].to_i, buyer: params[:buyer].to_i)
-  json({ status: "He's o-KAY!" })
+  data = JSON.parse(request.body.read)
+  Database.add_bid(amount: data["amount"].to_i, buyer: data["buyer"].to_i)
+  json(Database.bids.first)
 end

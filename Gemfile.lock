@@ -3,6 +3,7 @@ GEM
   specs:
     backports (3.6.0)
     eventmachine (1.0.3)
+    json (1.8.1)
     rack (1.4.1)
     rack-protection (1.2.0)
       rack
@@ -29,6 +30,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  json
   sinatra
   sinatra-contrib
   slim

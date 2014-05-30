@@ -22,15 +22,11 @@ bidApp.controller("bidCtrl", function($scope, $http) {
       alert("Bid at least " + minAmount);
       $scope.formBidAmount = minAmount;
     } else {
-      var bid = {
-        amount: amount,
-        buyer: $scope.buyerId,
-        reserve_met: true,
-        time: "2014-05-01 12:03",
-      }
-      $scope.bids.unshift(bid);
-
-      setLeadingBidAmount(amount);
+      var postData = { amount: amount, buyer: $scope.buyerId };
+      $http.post("/bid.json", postData).success(function(bid) {
+        $scope.bids.unshift(bid);
+        setLeadingBidAmount(bid.amount);
+      });
     }
   };
 
