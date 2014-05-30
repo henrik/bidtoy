@@ -1,0 +1,21 @@
+doctype html
+html ng-app="testApp"
+  head
+    title Test page
+  body ng-controller="testCtrl"
+    Xp What up
+
+    section
+      h2 list
+      div ng-repeat="phone in phones"
+        h3= "{{phone.name}}"
+        p= "{{phone.snippet}}"
+        p: a(ng-click="viewPhone(phone.id)") Details plz
+
+    section
+      h2 details
+      h3= "{{phone.name}}"
+      p= "{{phone.snippet}}"
+
+    script src="/angular.js"
+    script src="/testCtrl.js"
