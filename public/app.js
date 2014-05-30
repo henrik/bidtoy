@@ -9,7 +9,7 @@ bidApp.controller("bidCtrl", function($scope, $http) {
 
   $http.get("/bids.json").success(function(data) {
     $scope.bids = data;
-    setNextBidAmount(data[0].amount);
+    setLeadingBidAmount(data[0].amount);
   });
 
   $scope.buyerId = 1;
@@ -30,7 +30,7 @@ bidApp.controller("bidCtrl", function($scope, $http) {
       }
       $scope.bids.unshift(bid);
 
-      setNextBidAmount(amount);
+      setLeadingBidAmount(amount);
     }
   };
 
@@ -38,7 +38,8 @@ bidApp.controller("bidCtrl", function($scope, $http) {
     $scope.truncateAt = 9999;
   };
 
-  function setNextBidAmount(leadingAmount) {
+  function setLeadingBidAmount(leadingAmount) {
+    $scope.leadingBidAmount = leadingAmount;
     $scope.nextBidAmount = leadingAmount + 50;
     $scope.formBidAmount = $scope.nextBidAmount;
   }
