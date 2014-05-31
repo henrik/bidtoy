@@ -6,14 +6,14 @@ html ng-app="bidApp"
 
   body ng-controller="bidCtrl"
 
-    p Leading bid: {{leadingBidAmount()}} SEK
+    p Leading bid: {{leadingBidAmount() | number}} SEK
 
     form ng-submit="placeBid()"
       p
         ' Bid as buyer #
         select ng-model="buyerId"
           option(ng-repeat="n in [1, 2, 3, 4, 5]" value="{{n}}") {{n}}
-      input placeholder="{{nextBidAmount()}}" ng-model="formBidAmount"
+      input placeholder="{{nextBidAmount() | number}}" ng-model="formBidAmount"
       button Place bid
 
     table.bids
@@ -22,12 +22,13 @@ html ng-app="bidApp"
           span(style="background: {{bidColor(bid)}}")= "{{bid.buyer}}"
         td.bid-time= "{{bid.time}}"
         td.bid-amount ng-class="{ 'reserve-met': bid.reserve_met }"
-          ' {{bid.amount}} SEK
+          ' {{bid.amount | number}} SEK
       tr ng-show="bids.length > truncateAt"
         td.show-all-bids colspan=3
           a ng-click="showAllBids()"
-            ' Show all {{bids.length}} bids
+            ' Show all {{bids.length | number}} bids
 
     script src="/angular.js"
     script src="/angular-animate.js"
+    script src="/angular-locale_sv.js"
     script src="/app.js"
