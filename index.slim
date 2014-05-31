@@ -11,8 +11,7 @@ html ng-app="bidApp"
     form ng-submit="placeBid()"
       p
         ' Bid as buyer #
-        select ng-model="buyerId"
-          option(ng-repeat="n in [1, 2, 3, 4, 5]" value="{{n}}") {{n}}
+        select ng-model="buyerId" ng-options="n for n in [1, 2, 3, 4, 5]"
       input placeholder="{{nextBidAmount() | number}}" ng-model="formBidAmount"
       button Place bid
 
