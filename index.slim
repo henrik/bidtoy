@@ -12,7 +12,7 @@ html ng-app="bidApp"
       p
         ' Bid as buyer #
         select ng-model="buyerId" ng-options="n for n in [1, 2, 3, 4, 5]"
-      input placeholder="{{nextBidAmount | number}}" ng-model="formBidAmount"
+      input type="number" placeholder="{{nextBidAmount | number}}" min="{{nextBidAmount}}" ng-model="formBidAmount"
       button Place bid
 
     table.bids
