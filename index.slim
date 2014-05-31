@@ -6,13 +6,13 @@ html ng-app="bidApp"
 
   body.ng-cloak ng-controller="bidCtrl"
 
-    p Leading bid: {{leadingBidAmount() | number}} SEK
+    p Leading bid: {{leadingBidAmount | number}} SEK
 
     form ng-submit="placeBid()"
       p
         ' Bid as buyer #
         select ng-model="buyerId" ng-options="n for n in [1, 2, 3, 4, 5]"
-      input placeholder="{{nextBidAmount() | number}}" ng-model="formBidAmount"
+      input placeholder="{{nextBidAmount | number}}" ng-model="formBidAmount"
       button Place bid
 
     table.bids
