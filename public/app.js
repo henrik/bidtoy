@@ -1,18 +1,26 @@
 var App = angular.module("bidApp", [ "ngAnimate" ]);
 
-const TRUNCATE_AT = 5;
 const COLORS = [ "_", "powderblue", "chartreuse", "yellow", "pink", "#eee" ];
+const TRUNCATE_AT = 5;
 const BID_STEP = 50;
 
 App.controller("bidCtrl", function($scope, $http, $timeout) {
-  $scope.truncateAt = TRUNCATE_AT;
   $scope.buyerId = 1;
+  $scope.truncationEnabled = true;
   getUpdates();
 
   $scope.$watchCollection("bids", function(bids, oldBids) {
     var amount = bids[0].amount;
     $scope.leadingBidAmount = amount;
     $scope.nextBidAmount = amount + BID_STEP;
+
+    // Replacing a single record with a "show all" link is silly, so:
+    // 5 records = show all
+    // 6 records = show all
+    // 7 records = show 5, hide 2
+    // 8 records = show 5, hide 3
+    // etc
+    $scope.truncateAt = bids.length <= TRUNCATE_AT + 1 ? TRUNCATE_AT + 1 : TRUNCATE_AT;
   });
 
   $scope.bidColor = function(bid) {
@@ -39,7 +47,7 @@ App.controller("bidCtrl", function($scope, $http, $timeout) {
   };
 
   $scope.showAllBids = function() {
-    $scope.truncateAt = 9999;
+    $scope.truncationEnabled = false;
   };
 
   // Helpful thingies

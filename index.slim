@@ -16,13 +16,13 @@ html ng-app="bidApp"
       button Place bid
 
     table.bids
-      tr.bid ng-repeat="bid in bids track by bid.id" ng-show="$index < truncateAt"
+      tr.bid ng-repeat="bid in bids track by bid.id" ng-show="!truncationEnabled || $index < truncateAt"
         td.bid-buyer
           span(style="background: {{bidColor(bid)}}")= "{{bid.buyer}}"
         td.bid-time= "{{bid.time}}"
         td.bid-amount ng-class="{ 'reserve-met': bid.reserve_met }"
           ' {{bid.amount | number}} SEK
-      tr ng-show="bids.length > truncateAt"
+      tr ng-show="truncationEnabled && bids.length > truncateAt"
         td.show-all-bids colspan=3
           a ng-click="showAllBids()"
             ' Show all {{bids.length | number}} bids
