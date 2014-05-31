@@ -4,7 +4,7 @@ html ng-app="bidApp"
     title Test page
     link rel="stylesheet" href="/style.css"
 
-  body ng-controller="bidCtrl"
+  body.ng-cloak ng-controller="bidCtrl"
 
     p Leading bid: {{leadingBidAmount() | number}} SEK
 
