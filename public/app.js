@@ -20,7 +20,7 @@ App.controller("bidCtrl", function($scope, $http, $timeout) {
     // 7 records = show 5, hide 2
     // 8 records = show 5, hide 3
     // etc
-    $scope.truncateAt = bids.length <= TRUNCATE_AT + 1 ? TRUNCATE_AT + 1 : TRUNCATE_AT;
+    $scope.truncateAt = bids.length === TRUNCATE_AT + 1 ? TRUNCATE_AT + 1 : TRUNCATE_AT;
   });
 
   $scope.bidColor = function(bid) {
