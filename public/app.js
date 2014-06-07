@@ -4,7 +4,13 @@ const COLORS = [ "_", "powderblue", "chartreuse", "yellow", "pink", "#eee" ];
 const TRUNCATE_AT = 5;
 const BID_STEP = 50;
 
-App.controller("bidCtrl", function($scope, $http, $timeout) {
+App.config(function($locationProvider) {
+  $locationProvider.html5Mode(true);
+});
+
+App.controller("bidCtrl", function($scope, $http, $timeout, $location) {
+  $location.search("location-changed-from-angular");
+
   $scope.buyerId = 1;
   $scope.truncationEnabled = true;
   getUpdates();
