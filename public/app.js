@@ -8,7 +8,7 @@ App.config(function($locationProvider) {
   $locationProvider.html5Mode(true);
 });
 
-App.controller("bidCtrl", function($scope, $http, $timeout, $location) {
+App.controller("bidCtrl", function($scope, $http, $interval, $location) {
   $location.search("location-changed-from-angular");
 
   $scope.buyerId = 1;
