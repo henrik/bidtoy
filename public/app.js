@@ -10,7 +10,10 @@ App.controller("bidCtrl", function($scope, $http, $timeout) {
   getUpdates();
 
   $scope.$watchCollection("bids", function(bids, oldBids) {
+    if (!bids) return;
+
     var amount = bids[0].amount;
+
     $scope.leadingBidAmount = amount;
     $scope.nextBidAmount = amount + BID_STEP;
 
