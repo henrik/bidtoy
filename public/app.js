@@ -13,7 +13,10 @@ App.controller("bidCtrl", function($scope, $http, $timeout, $location) {
 
   $scope.buyerId = 1;
   $scope.truncationEnabled = true;
+
   getUpdates();
+  // Run this method on an interval. Poor man's websocket.
+  $interval(getUpdates, 2000);
 
   $scope.$watchCollection("bids", function(bids, oldBids) {
     if (!bids) return;
@@ -65,8 +68,5 @@ App.controller("bidCtrl", function($scope, $http, $timeout, $location) {
     $http.get("/bids.json").success(function(data) {
       $scope.bids = data;
     });
-
-    // Run this method on an interval. Poor man's websocket.
-    $timeout(getUpdates, 2000);
   }
 });
