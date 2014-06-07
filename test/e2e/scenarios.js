@@ -17,8 +17,7 @@ describe("Bid app", function() {
     var leadingBidAmount = element(by.binding("leadingBidAmount"));
 
     var field = element(by.model("formBidAmount"));
-    field.sendKeys("12345");
-    element(by.css("button")).click();
+    field.sendKeys("12345\n");
 
     expect(leadingBidAmount.getText()).toContain("12 345");
   });
