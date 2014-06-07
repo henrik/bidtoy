@@ -14,4 +14,19 @@ Uses Sinatra (a Ruby framework).
 
 ## Tests
 
-No tests yet! Ha. But see [issue #2](https://github.com/henrik/bidtoy/issues/2).
+See [issue #2](https://github.com/henrik/bidtoy/issues/2).
+
+#### End to end
+
+    # One time
+    npm install -g protractor
+    webdriver-manager update
+
+    # If they're not started
+    webdriver-manager start
+    rackup
+
+    # Every time you want to run the suite
+    protractor test/e2e/conf.js
+
+Read more: <https://github.com/angular/protractor/blob/master/docs/getting-started.md>
