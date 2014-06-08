@@ -16,6 +16,16 @@ Uses Sinatra (a Ruby framework).
 
 See [issue #2](https://github.com/henrik/bidtoy/issues/2).
 
+#### Unit
+
+Karma is configured with `autoWatch: true`, so if you leave it running, it picks up on changes and re-runs tests automatically.
+
+    # One time
+    npm install -g karma-cli
+
+    # To run the suite
+    karma start test/unit/karma.conf.js
+
 #### End to end
 
     # One time
