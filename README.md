@@ -14,6 +14,8 @@ Uses Sinatra (a Ruby framework).
 
 ## Tests
 
+Test coverage is poor and will likely remain so. I'll toy with testing different things but probably not thoroughly.
+
 #### Unit
 
 Karma is configured with `autoWatch: true`, so if you leave it running, it picks up on changes and re-runs tests automatically.
@@ -32,8 +34,10 @@ These are currently exceedingly stupid. They run against the development app and
     npm install -g protractor
     webdriver-manager update
 
-    # If they're not started
+    # If it's not started
     webdriver-manager start
+
+    # Restart this one before your test run
     rackup
 
     # Every time you want to run the suite
