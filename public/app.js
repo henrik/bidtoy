@@ -2,25 +2,19 @@ const COLORS = [ "_", "powderblue", "chartreuse", "yellow", "pink", "#eee" ];
 const TRUNCATE_AT = 5;
 const BID_STEP = 50;
 
-var App = angular.module("bidApp", [ "ngResource", "ngAnimate" ]);
+var App = angular.module("bidApp", [ "ngAnimate" ]);
 
 App.config(function($locationProvider) {
   $locationProvider.html5Mode(true);
 });
 
-App.factory("BidResource", function($resource) {
-  return $resource("/bids.json", {}, {
-    save: { method: "POST", url: "bid.json" }
-  });
-});
-
-App.service("BidService", function($http, BidResource) {
+App.service("BidService", function($http) {
   this.get = function() {
-    return BidResource.query().$promise;
+    return $http.get("/bids.json");
   };
 
   this.post = function(data) {
-    return BidResource.save(data).$promise;
+    return $http.post("/bid.json", data);
   };
 });
 
@@ -68,7 +62,7 @@ App.controller("bidCtrl", function($scope, $interval, $location, BidService) {
       alert("Bid at least " + minAmount);
     } else {
       var postData = { amount: amount, buyer: $scope.buyerId };
-      BidService.post(postData).then(function(bid) {
+      BidService.post(postData).success(function(bid) {
         $scope.bids.unshift(bid);
       });
     }
@@ -81,7 +75,7 @@ App.controller("bidCtrl", function($scope, $interval, $location, BidService) {
   // Helpful thingies
 
   function getUpdates() {
-    BidService.get().then(function(bids) {
+    BidService.get().success(function(bids) {
       $scope.bids = bids;
     });
   }
