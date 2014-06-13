@@ -28,7 +28,7 @@ App.controller("bidCtrl", function($scope, $interval, $location, BidService) {
   // Run this method on an interval. Poor man's websocket.
   $interval(getUpdates, 2000);
 
-  $scope.$watchCollection("bids", function(bids, oldBids) {
+  $scope.$watch("bids", function(bids, oldBids) {
     if (!bids) return;
 
     var amount = bids[0].amount;
